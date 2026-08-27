@@ -9,6 +9,9 @@ on:
     paths:
       - ".github/workflows/build.yml"
       - "patches/**"
+permissions:
+  contents: write
+# 授予对仓库内容（包括 Release）的写入权限
 
 jobs: 
   check_version:
