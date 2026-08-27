@@ -80,7 +80,7 @@ index b4b8dca6..d1ce5f62 100644
 \ No newline at end of file
 + 
 +    # thread_gmain
-+    random_name = "".join(random.sample(random_charset, 5))
++    random_name = "Xmain"
 +    log_color(f"[*] Patch `gmain` to `{random_name}`")
 +    os.system(f"sed -b -i s/gmain/{random_name}/g {input_file}")
 + 
