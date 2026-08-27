@@ -150,6 +150,8 @@ jobs:
         echo "ANDROID_NDK_ROOT=$ANDROID_NDK_ROOT"
         
         #git clone --recurse-submodules https://github.com/frida/frida
+        echo on
+        echo git clone --recursive --branch 17.17.0 https://github.com/frida/frida
         git clone --recursive --branch 17.17.0 https://github.com/frida/frida
         cd frida
         #git checkout 17.17.0
@@ -165,7 +167,8 @@ jobs:
         done
         cd ..
         
-        ARCHES="android-arm android-arm64 android-x86 android-x86_64"
+        #ARCHES="android-arm android-arm64 android-x86 android-x86_64"
+        ARCHES="android-arm64"
         for ARCH in $ARCHES
         do
           mkdir build-$ARCH
