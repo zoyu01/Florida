@@ -19,7 +19,7 @@ jobs:
 
     outputs:
 #      FRIDA_VERSION: ${{ steps.pullFridaLatestRelease.outputs.FRIDA_VERSION }}
-      FRIDA_VERSION: 17.17.0
+      FRIDA_VERSION: 17.9.1
       ALREADY_RELEASE: ${{ steps.checkReleaseVersion.outputs.ALREADY_RELEASE }}
     steps:
       - name: Pull Frida Latest Release
@@ -150,11 +150,11 @@ jobs:
         echo "ANDROID_NDK_ROOT=$ANDROID_NDK_ROOT"
         
         #git clone --recurse-submodules https://github.com/frida/frida
-        echo git clone --recursive --branch 17.17.0 https://github.com/frida/frida
-        git clone --recursive --branch 17.17.0 https://github.com/frida/frida
+        echo git clone --recursive --branch 17.9.1 https://github.com/frida/frida
+        git clone --recursive --branch 17.9.1 https://github.com/frida/frida
         cd frida
         git submodule status
-        #git checkout 17.17.0
+        #git checkout 17.9.1
         for path in ../patches/*
         do
           name=$(basename $path)
