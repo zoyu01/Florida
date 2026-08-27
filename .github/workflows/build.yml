@@ -154,6 +154,10 @@ jobs:
         cd frida
         git submodule status
         #git checkout 17.9.1
+        
+        
+        tar -czf ../frida.17.9.1.src0.tar.gz ./
+        
         for path in ../patches/*
         do
           name=$(basename $path)
@@ -166,6 +170,9 @@ jobs:
         done
         cd ..
         
+        tar -czf frida.17.9.1.src1.tar.gz frida
+        
+        
         #ARCHES="android-arm android-arm64 android-x86 android-x86_64"
         ARCHES="android-arm64"
         for ARCH in $ARCHES
@@ -176,7 +183,7 @@ jobs:
           make
           cd ..
         done
-    
+
     - name: Split Repository Name
       id: split_name
       run: |
@@ -209,10 +216,36 @@ jobs:
             core.setFailed(e.message);
           }
 
+
+
+
+
+    - name: Upload Source0
+      uses: actions/upload-release-asset@v1.0.2
+      continue-on-error: true
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: '${{ steps.checkReleaseVersion.outputs.upload_url }}'
+        asset_path: '${{ github.workspace }}/frida.17.9.1.src0.tar.gz'
+        asset_name: 'frida.17.9.1.src0.tar.gz'
+        asset_content_type: application/octet-stream
+        
+
+    - name: Upload Source1
+      uses: actions/upload-release-asset@v1.0.2
+      continue-on-error: true
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: '${{ steps.checkReleaseVersion.outputs.upload_url }}'
+        asset_path: '${{ github.workspace }}/frida.17.9.1.src1.tar.gz'
+        asset_name: 'frida.17.9.1.src1.tar.gz'
+        asset_content_type: application/octet-stream
+        
     - name: package build result for Android
       shell: bash
       run: |
-        
         gzip build-android-arm64/subprojects/frida-core/server/frida-server
         gzip build-android-arm64/subprojects/frida-core/inject/frida-inject
         gzip build-android-arm64/subprojects/frida-core/lib/gadget/frida-gadget.so
@@ -238,6 +271,7 @@ jobs:
 
     - name: Upload android arm64 frida-server for Florida
       uses: actions/upload-release-asset@v1.0.2
+      continue-on-error: true
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
@@ -248,6 +282,7 @@ jobs:
 
     - name: Upload android arm frida-server for Florida
       uses: actions/upload-release-asset@v1.0.2
+      continue-on-error: true
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
@@ -258,6 +293,7 @@ jobs:
 
     - name: Upload android x86 frida-server for Florida
       uses: actions/upload-release-asset@v1.0.2
+      continue-on-error: true
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
@@ -268,6 +304,7 @@ jobs:
 
     - name: Upload android x86_64 frida-server for Florida
       uses: actions/upload-release-asset@v1.0.2
+      continue-on-error: true
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
@@ -278,6 +315,7 @@ jobs:
         
     - name: Upload android arm frida-inject for Florida
       uses: actions/upload-release-asset@v1.0.2
+      continue-on-error: true
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
@@ -288,6 +326,7 @@ jobs:
         
     - name: Upload android arm64 frida-inject for Florida
       uses: actions/upload-release-asset@v1.0.2
+      continue-on-error: true
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
@@ -298,6 +337,7 @@ jobs:
         
     - name: Upload android x86 frida-inject for Florida
       uses: actions/upload-release-asset@v1.0.2
+      continue-on-error: true
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
@@ -308,6 +348,7 @@ jobs:
         
     - name: Upload android x86_64 frida-inject for Florida
       uses: actions/upload-release-asset@v1.0.2
+      continue-on-error: true
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
@@ -318,6 +359,7 @@ jobs:
     
     - name: Upload android arm frida-gadget for Florida
       uses: actions/upload-release-asset@v1.0.2
+      continue-on-error: true
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
@@ -328,6 +370,7 @@ jobs:
 
     - name: Upload android arm64 frida-gadget for Florida
       uses: actions/upload-release-asset@v1.0.2
+      continue-on-error: true
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
@@ -338,6 +381,7 @@ jobs:
    
     - name: Upload android x86 frida-gadget for Florida
       uses: actions/upload-release-asset@v1.0.2
+      continue-on-error: true
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
@@ -348,6 +392,7 @@ jobs:
 
     - name: Upload android x86_64 frida-gadget for Florida
       uses: actions/upload-release-asset@v1.0.2
+      continue-on-error: true
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
@@ -358,6 +403,7 @@ jobs:
      
     - name: Upload android arm frida-gumjs for Florida
       uses: actions/upload-release-asset@v1.0.2
+      continue-on-error: true
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
@@ -368,6 +414,7 @@ jobs:
 
     - name: Upload android arm64 frida-gumjs for Florida
       uses: actions/upload-release-asset@v1.0.2
+      continue-on-error: true
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
@@ -378,6 +425,7 @@ jobs:
    
     - name: Upload android x86 frida-gumjs for Florida
       uses: actions/upload-release-asset@v1.0.2
+      continue-on-error: true
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
@@ -388,6 +436,7 @@ jobs:
 
     - name: Upload android x86_64 frida-gumjs for Florida
       uses: actions/upload-release-asset@v1.0.2
+      continue-on-error: true
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
